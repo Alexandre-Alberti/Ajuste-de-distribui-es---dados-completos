@@ -1,0 +1,1 @@
+# Ajuste-de-distribui-es---dados-completos
