@@ -33,9 +33,9 @@ def ajustar_distribuicoes(dados):
 st.title("Ajuste de Distribuições de Tempo até Falha")
 
 # Entrada de dados pelo usuário
-dados_input = st.text_area("Insira os tempos até a falha, separados por vírgula:")
+dados_input = st.text_area("Insira os tempos até a falha (use ponto como separador decimal, e separe os números com vírgula):")
 
-if st.button("Ajustar"):
+if st.button("Ajustar distribuições de probabilidade"):
     try:
         # Processamento dos dados
         dados = list(map(float, dados_input.split(",")))
@@ -44,20 +44,16 @@ if st.button("Ajustar"):
         (c_weibull, scale_weibull, ks_weibull, p_weibull), (scale_expon, ks_expon, p_expon) = ajustar_distribuicoes(dados)
         
         # Exibir resultados
-        st.subheader("Resultados do Ajuste")
-        st.write(f"**Distribuição Weibull:** c = {c_weibull:.4f}, scale = {scale_weibull:.4f}")
-        st.write(f"Teste KS: D = {ks_weibull:.4f}, p-valor = {p_weibull:.4f}")
-        
-        st.write(f"**Distribuição Exponencial:** scale = {scale_expon:.4f}")
-        st.write(f"Teste KS: D = {ks_expon:.4f}, p-valor = {p_expon:.4f}")
-        
-        # Conclusão sobre aderência
-        st.subheader("Conclusão")
-        if p_weibull > 0.05:
+        st.subheader("Resultados")
+        st.write(f"**Distribuição Weibull:** parâmetro de forma = {c_weibull:.4f}, parâmetro de escala = {scale_weibull:.4f}")
+        st.write(f"Teste de aderência (KS): p-valor = {p_weibull:.4f}")
+        if p_p_weibull > 0.05:
             st.write("A distribuição Weibull pode ser um bom ajuste para os dados (p > 0.05).")
         else:
-            st.write("A distribuição Weibull pode não ser um bom ajuste para os dados (p < 0.05).")
-        
+             st.write("A distribuição Weibull pode não ser um bom ajuste para os dados (p < 0.05).")
+    
+        st.write(f"**Distribuição Exponencial:** tempo médio entre falhas = {scale_expon:.4f}")
+        st.write(f"Teste de aderência (KS): p-valor = {p_expon:.4f}")
         if p_expon > 0.05:
             st.write("A distribuição Exponencial pode ser um bom ajuste para os dados (p > 0.05).")
         else:
