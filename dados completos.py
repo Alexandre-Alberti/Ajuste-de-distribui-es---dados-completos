@@ -47,7 +47,7 @@ if st.button("Ajustar distribuições de probabilidade"):
         st.subheader("Resultados")
         st.write(f"**Distribuição Weibull:** parâmetro de forma = {c_weibull:.4f}, parâmetro de escala = {scale_weibull:.4f}")
         st.write(f"Teste de aderência (KS): p-valor = {p_weibull:.4f}")
-        if p_p_weibull > 0.05:
+        if p_weibull > 0.05:
             st.write("A distribuição Weibull pode ser um bom ajuste para os dados (p > 0.05).")
         else:
              st.write("A distribuição Weibull pode não ser um bom ajuste para os dados (p < 0.05).")
